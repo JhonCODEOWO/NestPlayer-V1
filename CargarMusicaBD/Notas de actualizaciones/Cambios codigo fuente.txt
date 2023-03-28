@@ -1,0 +1,40 @@
+﻿- Actualización 18/12/2022
+1. Se han añadido elementos try catch que permiten capturar errores y evitar caidas en la aplicación.
+2. Se han añadido los botones Repetir y Aleatorio.
+3. Se han añadido tres variables de manera global, dos de tipo boleano y una de tipo Random, para las funciones de los botones nuevos
+4. Se ha mejorado el manejo del progress bar al usar la función PerformedStep en ves de usar la variable i como estaba anteriormente
+
+- Actualización 19/12/2022
+1. Se ha solucionado un error que generaba una reproducción erronea al seleccionar un elemento de la tabla de musica mientras esta se reproducia}
+
+Elementos agregados: 
+Dato de tipo entero llamado indiceReproducción: Su propósito es almacenar en tiempo de ejecución el indice de la fila actual seleccionada
+para que se pueda usar posteriormente y no generar inconsistencias en la reproducción al adelantar/atrasar.
+
+Eventos en los que se ha introducido el nuevo tipo de datos:
+Evento de click en el boton siguiente y anterior.
+
+- Actualización 20/12/2022
+1. Se ha creado otra aplicación que utiliza como base de datos un archivo de access el cual permite reducir el peso de la aplicación y ademas
+   adminir el acceso a datos de una manera ligeramente mas rápida.
+
+2. Se han actualizado todos los métodos que trabajan con la base de datos y permiten que se opere en ella adaptandolo a oledb.
+
+3. Se ha codificado el boton del submenú en el datagridview que elimina un registro seleccionado de la base de datos.
+
+- Actualización 23/12/2022
+
+1. Se ha cambiado el proveedor de datos a SQLite así como todos los métodos que usaban al anterior proveedor de datos.
+
+2. Se han creado dos hilos para los dos tipos de agregar música, ademas de crear los respectivos delegados para los componentes que reciben información
+    mediante los métodos.
+
+3. El código está aún en proceso de optimización pues hay varias partes del código a mejorar para el agregado de música.
+
+- Actualización 29/12/2022
+
+1. Se ha añadido un nuevo método que obtiene las letras de los ficheros en base a lo que se reciba directamente desde la base de datos.
+2. Se ha agregado un nuevo formulario para la visualización de las letras obtenidas en base al método que se mencionó con anterioridad.
+3. Se ha añadido otro formulario que busca permitir la configuración del reproductor y se ha trabajado en recibir las fuentes y colores de la ventana
+    primaria.
+

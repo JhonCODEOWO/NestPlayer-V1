@@ -1,0 +1,109 @@
+﻿- Actualización 18/12/2022
+¡Nuevas funciones!
+1. Se ha añadido el botón de repetir y modo aleatorio
+2. Se ha aladido un submenú al seleccionar una canción que permite eliminar
+   el archivo de manera física en el disco o borrarlo de la base de datos.
+3. Se ha añadido al menú una opción que permite borrar todos las canciones
+   añadidas a la base de datos del reproductor.
+
+Notas de actualización:
+1. De momento aun no se pueden agregar canciones por carpeta, es necesario 
+   que las agregue de manera manual seleccionandolas.
+2. Al eliminar una canción almacenada en el disco deberá posteriormente 
+   borrarla de la base de datos, esto aun está en periodo de evaluación pues
+   puede que los usuarios deseen borrar la canción y no su registro en caso
+   de que vuelvan a agregar la canción a su ubicación anterior.
+3. Cualquier error que se presente puede ser reportado al correo que aparece
+   en la opción "Acerca De" en el menú de la aplicación.
+
+
+- Actualización mínima 20/12/2022
+1. Se ha realizado otra versión del reproductor que, ademas de ser portable pe-
+   rmite usarla requiriendo menos espacio de almacenamiento y con una optimiza-
+   ción ligeramente mejor.
+2. Se ha ubicado el control del volumen en un lugar mas agradable para el usuario.
+3. Ahora puedes eliminar registros de la base de datos dando click derecho dentro
+   de la lista de musica añadida.
+
+Notas de actualización:
+Se está trabahando en la reproducción por cola, por lo que se pide un poco de pacie-
+ncia.
+
+- Actualización 23/12/2022
+
+¡Nuevas Funciones!
+
+1. Se ha añadido la posibilidad de agregar música a partir de un directorio seleccionado
+
+Correcciones y mejoras de la aplicación
+
+1. Se ha mejorado el rendimiento en general
+2. Se ha corregido un error que bloqueaba la aplicación al agregar muchos ficheros de 
+    música.
+
+- Actualización 25/12/2022
+
+¡Interfaz nueva!
+Se ha modificado la interfaz esperando que el usuario pueda basarse mas en ver la lista
+de su biblioteca, esta interfaz es temporal puesto que estamos abiertos a recibir propue-
+stas para que sea lo más agradable de usar.
+
+Solucion de errores.
+1. Se ha solucionado un error que no permitia agregar mas de una vez seguida por el mé-
+    todo de recorrer las carpetas.
+2. Se ha solucionado un error que no permitía ver de manera fluida el progreso de la adición
+    de canciones.
+
+Problemas en progreso de solución
+1. Se ha detectado que hay un ligero congelamiento al añadir canciones mediante el 
+    escaneo de carpetas con muchos ficheros y subdirectorios, el problema no afecta de 
+    manera crítica a la aplicación por lo que puede seguir usando la función, por lo cual 
+    se pide paciencia, se está trabajando en solucionar ese ligero problema de 
+    rendimiento.
+
+- Actualización 29/12/2022
+
+¡Nuevas funciones!
+
+1. Ahora puedes visualizar las letras de las canciones (Si estas están en los metadatos)
+2. Se ha agregado un botón para ocultar la biblioteca y visualizar la reproducción en 
+    curso.
+
+Mejoras mínimas en la interfaz
+
+1. Ahora puedes visualizar de manera mas clara el valor del volumen acual de la
+    aplicación.
+2. Se han ubicado textos de manera correcta, que, anteriormente estaban mal
+    posicionados, o bien con una fuente no apta para la vista y el diesño.
+3. Finalmente el botón para acceder al menú solo necesita un clcik sobre el mismo y no
+    el molesto clic en la flecha que anteriormente tenía.
+
+Solución de errores
+
+1. Se ha solucionado un error que bloqueaba agregar música cuando seleccionabas
+    ficheros que no cumplian con el formato.
+2. Se ha mejorado el rendimiento al agregar música desde una carpeta padre al
+    esta contener muchos ficheros, aunque aun está en desarrollo pues se planea
+    optimizar aun más todos estos problemas.
+3. Se ha solucionado que, al reproducir una nueva canción y el botón de pausa
+    se haya activado antes, se siga mostrando como si siguiera en pausa.
+
+Mejoras en camino.
+1. Se está trabajando en la posibilidad de acceder a configuraciones que permitan la
+    personalización del reproductor, de momento esta opción está en el menú y se puede
+    acceder, sin embargo, aún no tiene funcionalidad.
+2. Botón de retroceso funcional en aleatorio: Como se han percatado al dar anterior y
+    tener activada la opción de "Aleatorio" la canción que se reproduce es otra 
+    totalmente aleatoria, se está trabajando para que el botón deje de tener esa 
+    incongruencia.
+
+- Actualización mínima 02/01/2023
+
+Mejoras en la interfaz
+
+1. Se ha removido el menú pues se considera que de momento no tiene
+    demasiada funcionalidad, y las opciones se han pasado a la barra superior
+    con el objetivo de que el usuario realice acciones más rápido.
+
+2. Se han renovado algunos cuadros de dialogo para que sean consistentes
+    con la paleta de colores del reproductor. 

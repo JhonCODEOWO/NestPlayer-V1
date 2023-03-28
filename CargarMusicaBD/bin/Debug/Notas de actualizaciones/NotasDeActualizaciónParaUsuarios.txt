@@ -1,0 +1,31 @@
+﻿- Actualización 18/12/2022
+¡Nuevas funciones!
+1. Se ha añadido el botón de repetir y modo aleatorio
+2. Se ha aladido un submenú al seleccionar una canción que permite eliminar
+   el archivo de manera física en el disco o borrarlo de la base de datos.
+3. Se ha añadido al menú una opción que permite borrar todos las canciones
+   añadidas a la base de datos del reproductor.
+
+Notas de actualización:
+1. De momento aun no se pueden agregar canciones por carpeta, es necesario 
+   que las agregue de manera manual seleccionandolas.
+2. Al eliminar una canción almacenada en el disco deberá posteriormente 
+   borrarla de la base de datos, esto aun está en periodo de evaluación pues
+   puede que los usuarios deseen borrar la canción y no su registro en caso
+   de que vuelvan a agregar la canción a su ubicación anterior.
+3. Cualquier error que se presente puede ser reportado al correo que aparece
+   en la opción "Acerca De" en el menú de la aplicación.
+
+- Actualización mínima 20/12/2022
+1. Se ha realizado otra versión del reproductor que, ademas de ser portable pe-
+   rmite usarla requiriendo menos espacio de almacenamiento y con una optimiza-
+   ción ligeramente mejor.
+
+2. Se ha ubicado el control del volumen en un lugar mas agradable para el usuario.
+
+3. Ahora puedes eliminar registros de la base de datos dando click derecho dentro
+   de la lista de musica añadida.
+
+Notas de actualización:
+Se está trabahando en la reproducción por cola, por lo que se pide un poco de pacie-
+ncia.
