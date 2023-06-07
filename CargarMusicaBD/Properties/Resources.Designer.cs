@@ -63,6 +63,26 @@ namespace CargarMusicaBD.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_actualizar_25 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-actualizar-25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_actualizar_25__1_ {
+            get {
+                object obj = ResourceManager.GetObject("icons8-actualizar-25 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_add_song_32__1_ {
             get {
                 object obj = ResourceManager.GetObject("icons8-add-song-32 (1)", resourceCulture);
@@ -176,6 +196,36 @@ namespace CargarMusicaBD.Properties {
         internal static System.Drawing.Bitmap icons8_carpeta_16 {
             get {
                 object obj = ResourceManager.GetObject("icons8-carpeta-16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_carpeta_de_la_música_30 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-carpeta-de-la-música-30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_configuración_de_datos_25 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-configuración-de-datos-25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_configuración_de_datos_25__1_ {
+            get {
+                object obj = ResourceManager.GetObject("icons8-configuración-de-datos-25 (1)", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

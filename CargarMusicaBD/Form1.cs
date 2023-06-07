@@ -44,6 +44,7 @@ namespace CargarMusicaBD
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            //Console.WriteLine(metodos.obtenerIDCarpeta(ruta));
             dataGridView1.DataSource = metodos.ShowSongs();
             if (dataGridView1.Rows.Count == 0)
             {
@@ -66,7 +67,7 @@ namespace CargarMusicaBD
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             //Console.WriteLine(repetir);
-            indice = 0;
+            indice = 0; // Cada vez que se seleccione una nueva canción el indice se reinicia, para poder aumentarlo
             if (dataGridView1.Rows.Count != 0)
             {
                 btnReanudar.Visible = false;
@@ -82,7 +83,8 @@ namespace CargarMusicaBD
                     Tags(dataGridView1.CurrentRow.Index);
                     setAlbumArt(dataGridView1.CurrentRow.Index);
                     //SetColor();
-                    indiceReproduccion = dataGridView1.CurrentRow.Index;
+                    indiceReproduccion = dataGridView1.CurrentRow.Index; //Se guarda un índice de la reproducción para darle un inicio al aumento de la variable indice
+                    Console.WriteLine(indiceReproduccion);
                 }
                 catch (Exception)
                 {
@@ -126,6 +128,7 @@ namespace CargarMusicaBD
             if (Reproductor.HasAudio)
             {
                 btnReanudar.Visible = true;
+                button1.Visible = false;
                 ts = Reproductor.Position;
                 Reproductor.Pause();
             }
@@ -145,7 +148,7 @@ namespace CargarMusicaBD
                     if (dataGridView1.Rows[dataGridView1.CurrentRow.Index + indice].Index < dataGridView1.Rows.Count - 1)
                     {
                         indice += 1;
-                        string ruta = dataGridView1.Rows[indiceReproduccion + indice].Cells[3].Value.ToString();
+                        string ruta = dataGridView1.Rows[indiceReproduccion + indice].Cells[3].Value.ToString(); //Al índice de reproducción acual se le va a sumar el indice aumentado
                         Reproductor.Open(new Uri(ruta));
                         Reproductor.Play();
                         Tags(indiceReproduccion + indice);
@@ -153,6 +156,7 @@ namespace CargarMusicaBD
                         //setLyrics(dataGridView1.CurrentRow.Index + indice);
                         //lblNombreFile.Text = dataGridView1.Rows[dataGridView1.CurrentRow.Index + indice].Cells[0].Value.ToString();
                         Console.WriteLine(ruta + " " + indice);
+                        Console.WriteLine(indiceReproduccion + indice);
                     }
                     else
                     {
@@ -225,7 +229,7 @@ namespace CargarMusicaBD
             progressBar1.Maximum = maximo;
         }
 
-        void AgregarDeCarpeta(string rutaDirectorio)
+        void AgregarDeCarpeta(string rutaDirectorio, int id)
         {
             string[] Directorios;
             try
@@ -290,7 +294,7 @@ namespace CargarMusicaBD
                                 artista = tagArtist;
                             }
                         }
-                        metodos.PushSongs(nombre, album, artista, Directorios[i].ToString());
+                        metodos.PushSongsFromFile(nombre, album, artista, Directorios[i].ToString(), id);
                         tareaCompletada = true;
                     }
                     this.Invoke(my, new object[] { i, Directorios.Length });
@@ -318,6 +322,9 @@ namespace CargarMusicaBD
                                 "Recomendación: Mueve tu música a una carpeta apta para esos ficheros, puedes usar la carpeta 'Música' del sistema operativo", "Error de permisos", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
+
 
         void AgregarFicherosConTags(string[] Rutas)
         {
@@ -504,6 +511,7 @@ namespace CargarMusicaBD
         private void btnReanudar_Click(object sender, EventArgs e)
         {
             btnReanudar.Visible = false;
+            button1.Visible = true;
             ts = Reproductor.Position;
             Reproductor.Position = ts;
             Reproductor.Play();
@@ -780,32 +788,7 @@ namespace CargarMusicaBD
             lblTotalFicheros.Text = "Total de canciones agregadas: " + dataGridView1.Rows.Count.ToString();
         }
 
-        private void añadirArchivosDesdeUnaCarpetaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            string rutaDirectorio = string.Empty;
-
-            FolderBrowserDialog dialog = new FolderBrowserDialog(); //Abrimos el selector de carpetas
-            dialog.ShowNewFolderButton = false;
-            dialog.Description = "Selecciona una carpeta que contenga archivos mp3 y flac\nSe recomienda almacenar la música dentro de la carpeta ya destinada por el sistema operativo";
-            if (dialog.ShowDialog() == DialogResult.OK) //Si se coloca ok
-            {
-                rutaDirectorio = dialog.SelectedPath; //Guardamos la ruta seleccionada
-
-                if (rutaDirectorio != null)
-                {
-                    thread = new Thread(() => AgregarDeCarpeta(rutaDirectorio));
-                    thread.Start();
-                }
-                else
-                {
-                    MessageBox.Show("Esta carpeta no tiene archivos dentro");
-                }
-            }
-            else
-            {
-                rutaDirectorio = null;
-            }
-        }
+        
 
         private void panel4_Paint(object sender, PaintEventArgs e)
         {
@@ -902,19 +885,38 @@ namespace CargarMusicaBD
             FolderBrowserDialog dialog = new FolderBrowserDialog(); //Abrimos el selector de carpetas
             dialog.ShowNewFolderButton = false;
             dialog.Description = "Selecciona una carpeta que contenga archivos mp3 y flac\nSe recomienda almacenar la música dentro de la carpeta ya destinada por el sistema operativo";
+
             if (dialog.ShowDialog() == DialogResult.OK) //Si se coloca ok
             {
                 rutaDirectorio = dialog.SelectedPath; //Guardamos la ruta seleccionada
 
-                if (rutaDirectorio != null)
+                if (metodos.AgregarCarpeta(rutaDirectorio) == true)
                 {
-                    thread = new Thread(() => AgregarDeCarpeta(rutaDirectorio));
-                    thread.Start();
+                    int id = metodos.obtenerIDCarpeta(rutaDirectorio);
+                    DialogResult dialogResult = new DialogResult();
+                    dialogResult = MessageBox.Show("Se ha añadido la carpeta seleccionada a la base de datos\n¿Deseas agregar su música ahora\nB¿No te preocupes si no la agregas ahora, posteriormente puedes hacaerlo pulsando en la administración de la biblioteca", "Confirmación", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        thread = new Thread(() => AgregarDeCarpeta(rutaDirectorio, id));
+                        thread.Start();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Se ha agregado a la base de datos exitosamente la ruta "+rutaDirectorio);
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("Esta carpeta no tiene archivos dentro");
+                else{
+                    MessageBox.Show("Ha ocurrido un error al agregar la carpeta");
                 }
+
+                //if (rutaDirectorio != null)
+                //{
+                    
+                //}
+                //else
+                //{
+                //    MessageBox.Show("Esta carpeta no tiene archivos dentro");
+                //}
             }
             else
             {
@@ -962,13 +964,47 @@ namespace CargarMusicaBD
 
         private void btnVisualizador_Click_1(object sender, EventArgs e)
         {
-            Metadatos metadatos = new Metadatos(metodos.obtenerRuta(lblNombreFile.Text, lblAlbum.Text, lblArtistas.Text));
+            Metadatos metadatos = new Metadatos(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[3].Value.ToString());
             metadatos.Show();
         }
 
         private void btnBiblioteca_Click_1(object sender, EventArgs e)
         {
+            if (iseePlayer == false)
+            {
+                iseePlayer = true;
+                btnBiblioteca.Image = Properties.Resources.icons8_ocultar_30;
+                this.Width = 512;
+                this.Height = 578;
+            }
+            else
+            {
+                iseePlayer = false;
+                this.Width = 1268;
+                this.Height = 578;
+                btnBiblioteca.Image = Properties.Resources.icons8_visible_30;
+            }
+        }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Dialogos_interfaz.ActualizarCarpetas actualizarCarpetas = new Dialogos_interfaz.ActualizarCarpetas();
+            actualizarCarpetas.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //Primero borramos los datos anteriores a esos
+            metodos.EliminarMusica();
+            //Ahora agregamos de nuevo la música
+            DataTable carpetas = metodos.obtenerDirectoriosGurdados();
+            //Recorremos el datatable y por cada iteracion agregamos la cancion con el id del registro de la carpeta a la base de datos
+            foreach (DataRow row in carpetas.Rows)
+            {
+                string ruta = row["URL"].ToString();
+                int id = metodos.obtenerIDCarpeta(ruta);
+                AgregarDeCarpeta(ruta, id);
+            }
         }
     }
 }

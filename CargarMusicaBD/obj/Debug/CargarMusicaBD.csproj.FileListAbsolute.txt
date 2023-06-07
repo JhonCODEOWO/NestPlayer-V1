@@ -49,3 +49,4 @@ C:\Users\eljho\OneDrive\Documentos\BackupsPDV\CargarMusicaBD - Con SQLLite\Carga
 C:\Users\eljho\OneDrive\Documentos\BackupsPDV\CargarMusicaBD - Con SQLLite\CargarMusicaBD\obj\Debug\CargarMusicaBD.AcercaDe.resources
 C:\Users\eljho\OneDrive\Documentos\BackupsPDV\CargarMusicaBD - Con SQLLite\CargarMusicaBD\obj\Debug\CargarMusicaBD.Dialogos_interfaz.DialogoBorrarTodoBD.resources
 C:\Users\eljho\OneDrive\Documentos\BackupsPDV\CargarMusicaBD - Con SQLLite\CargarMusicaBD\obj\Debug\CargarMusicaBD.Metadatos.resources
+C:\Users\eljho\OneDrive\Documentos\BackupsPDV\CargarMusicaBD - Con SQLLite\CargarMusicaBD\obj\Debug\CargarMusicaBD.Dialogos_interfaz.ActualizarCarpetas.resources

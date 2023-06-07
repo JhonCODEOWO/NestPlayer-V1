@@ -29,7 +29,7 @@ namespace CargarMusicaBD
                 parameter.ParameterName = "@NombreRecibido";
                 parameter.DbType = DbType.String;
                 parameter.Direction = ParameterDirection.Input;
-                parameter.Value = "%"+NombreRecibido+"%";
+                parameter.Value = "%" + NombreRecibido + "%";
                 command.Parameters.Add(parameter);
 
                 parameter = new SQLiteParameter();
@@ -77,12 +77,37 @@ namespace CargarMusicaBD
             }
         }
 
-        public DataTable ShowSongs()
+        public void PushSongsFromFile(string titulo, string Album, string artista, string ruta, int idCarpeta)
         {
-            
             try
             {
-                string seleccion = "SELECT * FROM Cancion";
+
+                string insert = "INSERT INTO Cancion VALUES (@Título, @Album, @Artista, @Ruta, @Carpeta)";
+                cn.Open();
+                SQLiteCommand command = new SQLiteCommand(insert, cn);
+                command.Parameters.AddWithValue("@Título", titulo);
+                command.Parameters.AddWithValue("@Album", Album);
+                command.Parameters.AddWithValue("@Artista", artista);
+                command.Parameters.AddWithValue("@Ruta", ruta);
+                command.Parameters.AddWithValue("@Carpeta", idCarpeta);
+                command.ExecuteNonQuery();
+                cn.Close();
+            }
+            catch (Exception ex)
+            {
+                cn.Close();
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+
+
+        public DataTable ShowSongs()
+        {
+
+            try
+            {
+                string seleccion = "SELECT Nombre, Album, Artistas, Ruta FROM Cancion";
                 SQLiteDataAdapter adapter = new SQLiteDataAdapter(seleccion, cn);
                 DataTable Tablaficheros = new DataTable();
 
@@ -158,7 +183,7 @@ namespace CargarMusicaBD
 
         public string obtenerRuta(string nombre, string album, string artistas)
         {
-           
+
             try
             {
                 string letras = null;
@@ -215,9 +240,107 @@ namespace CargarMusicaBD
             }
         }
 
-        /*public string obtenerRutaBD(string nombre, string album, string artistas)
-        {
 
-        }*/
+        public bool AgregarCarpeta(string url)
+        {
+            try
+            {
+                bool existe = false;
+                DataTable rutasCarpetas = obtenerDirectoriosGurdados();
+                foreach (DataRow fila in rutasCarpetas.Rows)
+                {
+                    existe = (fila["URL"].ToString() == url) ? true : false;
+                }
+                if (existe == true)
+                {
+                    Console.WriteLine("En if");
+                    MessageBox.Show("Ya has guardado esta carpeta");
+                    return false;
+                }
+                else
+                {
+                    Console.WriteLine("En else");
+                    string consulta = "INSERT INTO Carpetas(IDCarpeta, URL) VALUES (null, @URL)";
+                    SQLiteCommand sQLiteCommand = new SQLiteCommand(consulta, cn);
+                    sQLiteCommand.Parameters.AddWithValue("@URL", url);
+                    cn.Open();
+                    sQLiteCommand.ExecuteNonQuery();
+                    cn.Close();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+                cn.Close();
+            }
+        }
+
+        public void eliminarCarpeta(string cadenaCarpeta)
+        {
+            try
+            {
+                string consulta = "DELETE FROM Carpetas WHERE URL = @cadenaCarpeta";
+                SQLiteCommand sQLiteCommand = new SQLiteCommand(consulta, cn);
+                sQLiteCommand.Parameters.AddWithValue("@cadenaCarpeta", cadenaCarpeta);
+                cn.Open();
+                sQLiteCommand.ExecuteNonQuery();
+                cn.Close();
+                MessageBox.Show("Eliminado correctamente");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public int obtenerIDCarpeta(string nombreCarpeta)
+        {
+            try
+            {
+                int id = 0;  
+                string consulta = "SELECT IDCarpeta FROM Carpetas WHERE URL = @nombreCarpeta";
+                SQLiteCommand sQLiteCommand = new SQLiteCommand(consulta, cn);
+                sQLiteCommand.Parameters.AddWithValue("@nombreCarpeta", nombreCarpeta);
+
+                SQLiteDataAdapter sQLiteDataAdapter = new SQLiteDataAdapter(sQLiteCommand);
+                DataTable dataTable = new DataTable();
+                sQLiteDataAdapter.Fill(dataTable);
+                sQLiteDataAdapter = null;
+
+                Console.WriteLine(dataTable.Rows.Count);
+                foreach (DataRow fila in dataTable.Rows)
+                {
+                    id = Convert.ToInt32(fila["IDCarpeta"].ToString());
+                    //Console.WriteLine(fila["IDCarpeta"].ToString());
+                }
+                return id;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message + " " + ex.StackTrace);
+                return 0;
+            }
+        }
+
+
+        public DataTable obtenerDirectoriosGurdados()
+        {
+            try
+            {
+                string consulta = "SELECT URL FROM Carpetas";
+                SQLiteDataAdapter sQLiteDataAdapter = new SQLiteDataAdapter(consulta, cn);
+                DataTable urls = new DataTable();
+                sQLiteDataAdapter.Fill(urls);
+                sQLiteDataAdapter = null;
+                return urls;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
     }
 }
